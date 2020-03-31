@@ -1,17 +1,14 @@
-import 'package:black_cumin/providers/articles.dart';
-import 'package:black_cumin/widgets/articles_list.dart';
+import '../providers/journals.dart';
+import '../widgets/journals_list.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class ArticleOverviewScreen extends StatefulWidget {
-  static const routeName = '/article-overview-screen';
-  final int journalId;
-  ArticleOverviewScreen({this.journalId});
+class JournalOverviewScreen extends StatefulWidget {
   @override
-  _ArticleOverviewScreenState createState() => _ArticleOverviewScreenState();
+  _JournalOverviewScreenState createState() => _JournalOverviewScreenState();
 }
 
-class _ArticleOverviewScreenState extends State<ArticleOverviewScreen> {
+class _JournalOverviewScreenState extends State<JournalOverviewScreen> {
   var _isInit = true;
   var _isLoading = false;
 
@@ -21,7 +18,7 @@ class _ArticleOverviewScreenState extends State<ArticleOverviewScreen> {
       setState(() {
         _isLoading = true;
       });
-      await Provider.of<Articles>(context).fetchAndSetArticles(widget.journalId);
+      await Provider.of<Journals>(context).fetchAndSetJournals();
       setState(() {
         _isLoading = false;
       });
@@ -37,7 +34,7 @@ class _ArticleOverviewScreenState extends State<ArticleOverviewScreen> {
           ? Center(
               child: CircularProgressIndicator(),
             )
-          : SafeArea(child: ArticlesList(journalId: widget.journalId)),
+          : SafeArea(child: JournalsList()),
     );
   }
 }
